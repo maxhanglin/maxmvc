@@ -33,6 +33,11 @@ class Router {
 		return (isset($parts[$part])) ? $parts[$part] : "";
 	}
 
+	/**
+	 * Gets an URL input string and converts it to a controller:action pair of values.
+	 * @param  string $inputURL
+	 * @return Array $route
+	 */
 	private function findRoute($inputURL) {
 
 		// loop through all the routes specified in the configuration

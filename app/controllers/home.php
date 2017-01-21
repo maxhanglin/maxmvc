@@ -3,7 +3,7 @@
 class home extends BaseController {
 
 	function index() {
-		Load::view("home/index", [
+		View::render("home/index", [
 			"name" => "Buddy"
 		]);
 	}
