@@ -11,7 +11,11 @@ class Router {
 		if (class_exists($route["controller"])) {
 			$controller = new $route["controller"]();
 			if (method_exists($controller, $route["action"])) {
-				$controller->$route["action"]();
+				if ($route["value"]) {
+					$controller->$route["action"]($route["value"]);
+				} else {
+					$controller->$route["action"]();
+				}
 			} else {
 				Error::show(404);
 			}
@@ -58,10 +62,45 @@ class Router {
 		return $uri_2;
 	}
 
+	static function getCurrentValue($inputURL = null) {
+
+		if (is_null($inputURL)) {
+			parse_str($_SERVER["QUERY_STRING"], $qsOutput);
+			if (!isset($qsOutput["url"])) {
+				$qsOutput["url"] = "";
+			}
+			$inputURL = $qsOutput["url"];
+		}
+
+		$uri_3 = Router::getUriPart($inputURL, 2);
+		
+		if ($uri_3 == "") {
+			$uri_3 = null;
+		}
+		
+		return $uri_3;
+	}
+
 	static function redirect($url, $permanent = false)
 	{
 	    header('Location: ' . $url, true, $permanent ? 301 : 302);
 	    exit();
+	}
+
+	static function isGET() {
+		return ($_SERVER['REQUEST_METHOD'] === "GET");
+	}
+
+	static function isPOST() {
+		return ($_SERVER['REQUEST_METHOD'] === "POST");
+	}
+
+	static function isPUT() {
+		return ($_SERVER['REQUEST_METHOD'] === "PUT");
+	}
+
+	static function isDELETE() {
+		return ($_SERVER['REQUEST_METHOD'] === "DELETE");
 	}
 
 	private function getRouteParts($route) {
@@ -110,7 +149,8 @@ class Router {
 		// or the default action for the specified controller
 		$route = array(
 			"controller" => self::getCurrentController($inputURL),
-			"action" => self::getCurrentAction($inputURL)
+			"action" => self::getCurrentAction($inputURL),
+			"value" => self::getCurrentValue($inputURL)
 		);
 		return $route;
 	}
