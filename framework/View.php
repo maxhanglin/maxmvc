@@ -25,18 +25,18 @@ class View {
 
 	// Taken from http://php.net/manual/en/function.include.php and updated for my needs.
 	private static function get_include_contents($filename, $vars) {
-	    if (is_file($filename)) {
-	        ob_start();
+		if (is_file($filename)) {
+			ob_start();
 
-	        // Create variables from the vars array
+			// Create variables from the vars array
 			foreach ($vars as $key => $value) {
 				$$key = $value;
 			}
-	        include $filename;
+			include $filename;
 
-	        return ob_get_clean();
-	    }
-	    return false;
+			return ob_get_clean();
+		}
+		return false;
 	}
 
 	/**
