@@ -3,29 +3,12 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-$GLOBALS["config"] = array(
-	"addName" => "maxmvc website",
-	"domain" => "maxmvc.dev",
-	"path" => array(
-		"app" => "app/",
-		"core" => "framework/",
-		"index" => "index.php"
-	),
-	"defaults" => array(
-		"controller" => "home",
-		"action" => "index"
-	),
-	"routes" => array(),
-	"database" => array(
-		"host" => "localhost",
-		"username" => "",
-		"password" => "",
-		"dbname" => ""
-	)
-);
-
-require_once $GLOBALS["config"]["path"]["core"]."autoload.php";
+require __DIR__ . '/app/config/globals.php';
+require __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/framework/autoload.php';
 parse_str($_SERVER["QUERY_STRING"], $qsOutput);
+
+// Start routing
 if (!isset($qsOutput["url"])) {
 	$qsOutput["url"] = "";
 }

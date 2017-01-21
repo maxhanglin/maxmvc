@@ -1,0 +1,21 @@
+{
+    "name": "maxhanglin/maxmvc",
+    "description": "MaxMVC framework",
+    "type": "library",
+    "keywords": ["framework"],
+    "homepage": "https://github.com/maxhanglin/maxmvc",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Maximiliano Hanglin",
+            "homepage": "https://github.com/maxhanglin"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "joshcam/mysqli-database-class": "dev-master"
+        
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
