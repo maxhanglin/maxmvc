@@ -20,6 +20,44 @@ class Router {
 		}
 	}
 
+	static function getCurrentController($inputURL = null) {
+		
+		if (is_null($inputURL)) {
+			parse_str($_SERVER["QUERY_STRING"], $qsOutput);
+			if (!isset($qsOutput["url"])) {
+				$qsOutput["url"] = "";
+			}
+			$inputURL = $qsOutput["url"];
+		}
+
+		$uri_1 = Router::getUriPart($inputURL, 0);
+
+		if ($uri_1 == "") {
+			$uri_1 = $GLOBALS["config"]["defaults"]["controller"];
+		}
+
+		return $uri_1;
+	}
+
+	static function getCurrentAction($inputURL = null) {
+
+		if (is_null($inputURL)) {
+			parse_str($_SERVER["QUERY_STRING"], $qsOutput);
+			if (!isset($qsOutput["url"])) {
+				$qsOutput["url"] = "";
+			}
+			$inputURL = $qsOutput["url"];
+		}
+
+		$uri_2 = Router::getUriPart($inputURL, 1);
+		
+		if ($uri_2 == "") {
+			$uri_2 = $GLOBALS["config"]["defaults"]["action"];
+		}
+		
+		return $uri_2;
+	}
+
 	private function getRouteParts($route) {
 		if (is_array($route)) {
 			$route = $route["url"];
@@ -64,17 +102,9 @@ class Router {
 		// if we don't have a match between the defined routes
 		// we either return the default controller-action pair
 		// or the default action for the specified controller
-		$uri_1 = Router::getUriPart($inputURL, 0);
-		$uri_2 = Router::getUriPart($inputURL, 1);
-		if ($uri_1 == "") {
-			$uri_1 = $GLOBALS["config"]["defaults"]["controller"];
-		}
-		if ($uri_2 == "") {
-			$uri_2 = $GLOBALS["config"]["defaults"]["action"];
-		}
 		$route = array(
-			"controller" => $uri_1,
-			"action" => $uri_2
+			"controller" => self::getCurrentController($inputURL),
+			"action" => self::getCurrentAction($inputURL)
 		);
 		return $route;
 	}

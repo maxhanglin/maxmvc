@@ -1,7 +1,7 @@
 <?php
 
 $GLOBALS["config"] = array(
-	"addName" => "maxmvc website",
+	"appName" => "My Top 10 Movies",
 	"domain" => "maxmvc.dev",
 	"path" => array(
 		"app" => "app/",

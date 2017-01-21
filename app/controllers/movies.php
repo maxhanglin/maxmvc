@@ -3,6 +3,7 @@
 class movies {
 	
 	function index() {
-		View::render("movies/index");
+		$movies = Movie::getMovies();
+		View::render("movies/index", ["movies" => $movies]);
 	}
 }
