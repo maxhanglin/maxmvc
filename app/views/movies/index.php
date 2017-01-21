@@ -19,9 +19,11 @@
 		</tr>
 	</thead>
 	<tbody>
+		<? $i = 0; ?>
 		<? foreach ($movies as $movie): ?>
+		<? $i++; ?>
 		<tr>
-			<th scope="row"><?=$movie->id?></th>
+			<th scope="row"><?=$i?></th>
 			<td><?=$movie->title?></td>
 			<td class="text-justify"><?=$movie->synopsis?></td>
 			<td><?=$movie->director?></td>
