@@ -26,4 +26,7 @@ $GLOBALS["config"] = array(
 
 require_once $GLOBALS["config"]["path"]["core"]."autoload.php";
 parse_str($_SERVER["QUERY_STRING"], $qsOutput);
+if (!isset($qsOutput["url"])) {
+	$qsOutput["url"] = "";
+}
 new Router($qsOutput["url"]);
