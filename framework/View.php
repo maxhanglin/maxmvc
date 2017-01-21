@@ -23,6 +23,22 @@ class View {
 
 	}
 
+	static function renderNoLayout($view, $vars = array()) {
+
+		// Check filename extension
+		$extensionCheck = explode(".", $view);
+		if (!isset($extensionCheck[1])) {
+			$view .= ".php";
+		}
+
+		// Create variables from the vars array
+		foreach ($vars as $key => $value) {
+			$$key = $value;
+		}
+
+		require_once $GLOBALS["config"]["path"]["app"]."views/{$view}";
+	}
+
 	// Taken from http://php.net/manual/en/function.include.php and updated for my needs.
 	private static function get_include_contents($filename, $vars) {
 		if (is_file($filename)) {
