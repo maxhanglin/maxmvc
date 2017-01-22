@@ -2,7 +2,7 @@
 	<div class="col-md-8"><h1>My Favorite Movies</h1></div>
 	<div class="col-md-4">
 		<p class="text-right" style="margin-top: 25px;">
-			<a href="/movies/add" class="btn btn-primary" role="button">Add New</a>
+			<a href="/movies/new" class="btn btn-primary" role="button">Add New</a>
 		</p>
 	</div>
 </div>
