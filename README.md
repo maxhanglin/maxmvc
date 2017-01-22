@@ -138,7 +138,7 @@ In `app/views/test/foo.php`:
 In `app/controllers/test.php`:
 ```php
 	function foo($mytext) {
-		View::render("test/foo", ["text" => $text]);
+		View::render("test/foo", ["text" => $mytext]);
 	}
 ```
 
@@ -147,6 +147,6 @@ Sometimes, for example in AJAX responses, you don't need to render all the main 
 
 ```php
 	function nolayout($mytext) {
-		View::renderNoLayout("test/foo", ["text" => $text]);
+		View::renderNoLayout("test/foo", ["text" => $mytext]);
 	}
 ```
