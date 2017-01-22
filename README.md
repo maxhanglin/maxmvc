@@ -150,3 +150,53 @@ Sometimes, for example in AJAX responses, you don't need to render all the main 
 		View::renderNoLayout("test/foo", ["text" => $mytext]);
 	}
 ```
+
+## Models
+Models in MaxMVC are pretty much freeform to let you express your creativity while using them. However, here are a few lines of recommendations in order to follow the best practices.
+
+Basic form:
+```php
+class MyModel extends BaseModel 
+{	
+	private $_name = "";
+}
+```
+
+By using the above form you will be extending from `BaseModel`, the main utility of this base class for now, is to give you getters and setters for your members following the `$_<name>` structure. Using this base class is optional.
+
+Now lets create a constructor and one method inside it:
+```php
+class MyModel extends BaseModel 
+{	
+	private $_name = "";
+	
+	function __construct($name) {
+		$this->_name = $name;
+	}
+	
+	function displayName() {
+		return "The name is ".$this->_name;
+	}
+}
+```
+
+Use `MyModel` from the test controller is really simple, thanks to the autoload functionality:
+
+```php
+<?php
+
+class test {
+    function index() {
+        echo "My first controller";
+    }
+    function foo($mytext) {
+        View::render("test/foo", ["text" => $mytext]);
+    }
+
+    // Lets use the new model here
+    function name() {
+    	$myModel = new MyModel('Max');
+    	View::render("test/foo", ["text" => $myModel->displayName()]);	
+    }
+}
+```
