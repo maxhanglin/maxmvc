@@ -105,4 +105,4 @@ Second, edit the routes configuration to look like the one below:
 ),
 ```
 
-Now, if you navigate to `maxmvc/text/my-first-action/hello` you will see: *Foo action says hello*!!
+Now, if you navigate to `maxmvc/test/my-first-action/hello` you will see: *Foo action says hello*!!
