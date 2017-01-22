@@ -11,7 +11,7 @@ class Router {
 		if (class_exists($route["controller"])) {
 			$controller = new $route["controller"]();
 			if (method_exists($controller, $route["action"])) {
-				if ($route["value"]) {
+				if (isset($route["value"]) && $route["value"] != null) {
 					$controller->$route["action"]($route["value"]);
 				} else {
 					$controller->$route["action"]();
@@ -132,7 +132,9 @@ class Router {
 
 			// check if the input URL matches the route
 			foreach ($parts as $index => $part) {
-				if ($part != "*") {
+				if (strlen($part) > 0 && $part[0] == ":") {
+					$route["value"] = self::getCurrentValue($inputURL);
+				} else if ($part != "*") {
 					if (Router::getUriPart($inputURL, $index) != $part) {
 						$allMatch = false;
 					}
