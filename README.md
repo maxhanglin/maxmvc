@@ -200,3 +200,20 @@ class test {
     }
 }
 ```
+
+## Database
+The approach used for giving MaxMVC database capabilities was to make a wrapper to this very cool featured library:<br>
+https://github.com/joshcam/PHP-MySQLi-Database-Class
+
+In order to use it inside MaxMVC just do:
+```php
+$DB = new Database();
+```
+
+and to get all the records from the *test* table, do:
+```php
+$DB = new Database();
+$result = $DB->connection()->get('test');
+```
+
+Please check the library README file [here](https://github.com/joshcam/PHP-MySQLi-Database-Class/blob/master/readme.md) and also check the [Movie Model](https://github.com/maxhanglin/maxmvc/blob/master/app/models/Movie.php) included in the sample project to get an idea of how to use the database functionalities.
