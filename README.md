@@ -34,8 +34,10 @@ i.e. `cd ~/my_projects/maxmvc`
 )
 ```
 
-You are set to start working! Test it by going to the URL where you installed the project, i.e.: `http://localhost/maxmvc`. You should see something like this:<br><br>
+You are set to start working! Test it by going to the URL where you installed the project, i.e.: `http://www.maxmvc.dev/`. You should see something like this:<br><br>
 ![Home Screen](https://raw.githubusercontent.com/maxhanglin/maxmvc/master/screenshot.png "Home Screen")
+
+*Note: Make sure you configure your hosts to be of the form "http://www.myhost.something/" and avoid using a prefixed directory like in the case "http://localhost/maxmvc" as your root domain. The router is very basic for now and has this limitation.*
 
 ## Controllers
 Creating a new controller is really easy:
@@ -53,8 +55,8 @@ class test {
 }
 ```
 
-- If you navigate to `/maxmvc/test` you should see "My first controller" text printed on the top of the screen.
-- You can create as much actions as you want, i.e. `/maxmvc/test/foo` will print "Foo action":
+- If you navigate to `http://www.maxmvc.dev/test` you should see "My first controller" text printed on the top of the screen.
+- You can create as much actions as you want, i.e. `http://www.maxmvc.dev/test/foo` will print "Foo action":
 ```php
 <?php
 
@@ -105,7 +107,7 @@ Second, edit the routes configuration to look like the one below:
 ),
 ```
 
-Now, if you navigate to `maxmvc/test/my-first-action/hello` you will see: *Foo action says hello*!!
+Now, if you navigate to `http://www.maxmvc.dev/test/my-first-action/hello` you will see: *Foo action says hello*!!
 
 ## Views
 All the views in MaxMVC are structured like `app/views/<controller-name>/<action-name>`. For example, and following our previous case of the `test/foo` controller, the organization should be like: `app/views/test/foo.php`.
