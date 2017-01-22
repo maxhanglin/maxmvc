@@ -37,7 +37,7 @@ i.e. `cd ~/my_projects/maxmvc`
 You are set to start working! Test it by going to the URL where you installed the project, i.e.: `http://localhost/maxmvc`. You should see something like this:<br><br>
 ![Home Screen](https://raw.githubusercontent.com/maxhanglin/maxmvc/master/screenshot.png "Home Screen")
 
-## How to create a new Controller class
+## Controllers
 Creating a new controller is really easy:
 
 - Create a new file under `app/controllers`
@@ -106,3 +106,47 @@ Second, edit the routes configuration to look like the one below:
 ```
 
 Now, if you navigate to `maxmvc/test/my-first-action/hello` you will see: *Foo action says hello*!!
+
+## Views
+All the views in MaxMVC are structured like `app/views/<controller-name>/<action-name>`. For example, and following our previous case of the `test/foo` controller, the organization should be like: `app/views/test/foo.php`.
+
+### Layout
+All the views use the default system layout (unless specified differently), defined in `app/layouts/default.php`, which implements a basic bootstrap template. 
+
+### Content
+The content will need to include only the HTML specific for that view, and any script needed. 
+
+To give a basic example, lets implement the view for our test/foo action, and use it on the controller:
+
+In `app/views/test/foo.php`:
+```html
+<!-- View for test/foo -->
+<h1>Foo action says</h1>
+<h3><?=$text?></h3>
+
+<a href="#" id="showAlertBtn">Click me!</a>
+
+<script type="text/javascript">
+	$('document').ready(function() {
+		$('showAlertBtn').click(function() {
+			alert("Thanks for clicking on me!");
+		});
+	});
+</script>
+```
+
+In `app/controllers/test.php`:
+```php
+	function foo($mytext) {
+		View::render("test/foo", ["text" => $text]);
+	}
+```
+
+#### Specify a NO LAYOUT content
+Sometimes, for example in AJAX responses, you don't need to render all the main layout again, but only some content specified in the view. In those cases, you can use the following directive in the controller, to render only the view contents:
+
+```php
+	function nolayout($mytext) {
+		View::renderNoLayout("test/foo", ["text" => $text]);
+	}
+```
