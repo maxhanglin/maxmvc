@@ -34,5 +34,75 @@ i.e. `cd ~/my_projects/maxmvc`
 )
 ```
 
-You are set to start working! Test it by going to the URL where you installed the project, i.e.: `http://localhost/maxmvc`. You should see something like this:<br>
+You are set to start working! Test it by going to the URL where you installed the project, i.e.: `http://localhost/maxmvc`. You should see something like this:<br><br>
 ![Home Screen](https://raw.githubusercontent.com/maxhanglin/maxmvc/master/screenshot.png "Home Screen")
+
+## How to create a new Controller class
+Creating a new controller is really easy:
+
+- Create a new file under `app/controllers`
+- The new file should look like this
+
+```php
+<?php
+
+class test {
+	function index() {
+		echo "My first controller";
+	}
+}
+```
+
+- If you navigate to `/maxmvc/test` you should see "My first controller" text printed on the top of the screen.
+- You can create as much actions as you want, i.e. `/maxmvc/test/foo` will print "Foo action":
+```php
+<?php
+
+class test {
+	function index() {
+		echo "My first controller";
+	}
+	function foo() {
+		echo "Foo action";
+	}
+}
+```
+
+## Routing
+By default, the system will use your [controller class_name + "/" + action_name] as the standard route for any of your actions. You can override this behavior by adding your configuration to the routes section.
+
+For example, lets imagine you don't like to use `test/foo` for your URL, instead you want to get the foo text when you navigate to `test/my-first-action`. In that case you should update your config routing section this way:
+
+```php
+/* Routes Definition Section */
+"routes" => array(
+	array(
+		"url" => "test/my-first-action",
+		"controller" => "test",
+		"action" => "foo"
+	)
+),
+```
+
+Now, imagine you want to send your own custom test to the foo action. First, lets edit the controller:
+
+```php
+	function foo($mytext) {
+		echo "Foo action says ".$mytext;
+	}
+```
+
+Second, edit the routes configuration to look like the one below:
+
+```php
+/* Routes Definition Section */
+"routes" => array(
+	array(
+		"url" => "test/my-first-action/:mytext",
+		"controller" => "test",
+		"action" => "foo"
+	)
+),
+```
+
+Now, if you navigate to `maxmvc/text/my-first-action/hello` you will see: *Foo action says hello*!!
