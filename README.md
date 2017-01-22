@@ -128,7 +128,7 @@ In `app/views/test/foo.php`:
 
 <script type="text/javascript">
 	$('document').ready(function() {
-		$('showAlertBtn').click(function() {
+		$('#showAlertBtn').click(function() {
 			alert("Thanks for clicking on me!");
 		});
 	});
